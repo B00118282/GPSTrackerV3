@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         updateGPS();
+
 
     } //End onCreate method
 
@@ -101,22 +101,21 @@ public class MainActivity extends AppCompatActivity {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        //Display the values of users location on the UI
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //User gives permission
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    //Display the values of users location on the UI
                     updateUIValues(location);
-
-
 
                 }
             });
-        } else {
+        }
+        else {
             //User denies permission
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
+                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
             }
         }
     }
@@ -132,14 +131,15 @@ public class MainActivity extends AppCompatActivity {
             tv_altitude.setText(String.valueOf(location.getAltitude()));
         }
         else {
-            tv_altitude.setText("Altitude not available");
+            tv_altitude.setText("Not available");
         }
-
         if (location.hasSpeed()) {
             tv_speed.setText(String.valueOf(location.getSpeed()));
         }
         else {
-            tv_speed.setText("Speed not available");
+            tv_speed.setText("Not available");
         }
+
+
     }
 }

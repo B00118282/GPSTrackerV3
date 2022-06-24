@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GPSTrackerV3</string>
+    <string name="latitude">\@+id/tv_lat</string>
 </resources>
