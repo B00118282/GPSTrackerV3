@@ -121,25 +121,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUIValues(Location location) {
+        if (location != null) {
+            //Update TextViews with the new Location
+            tv_lat.setText(String.valueOf(location.getLatitude()));
+            tv_lon.setText(String.valueOf(location.getLongitude()));
+            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
 
-        //Update TextViews with the new Location
-        tv_lat.setText(String.valueOf(location.getLatitude()));
-        tv_lon.setText(String.valueOf(location.getLongitude()));
-        tv_accuracy.setText(String.valueOf(location.getAccuracy()));
-
-        if (location.hasAltitude()) {
-            tv_altitude.setText(String.valueOf(location.getAltitude()));
+            if (location.hasAltitude()) {
+                tv_altitude.setText(String.valueOf(location.getAltitude()));
+            } else {
+                tv_altitude.setText("Not available");
+            }
+            if (location.hasSpeed()) {
+                tv_speed.setText(String.valueOf(location.getSpeed()));
+            } else {
+                tv_speed.setText("Not available");
+            }
         }
-        else {
-            tv_altitude.setText("Not available");
-        }
-        if (location.hasSpeed()) {
-            tv_speed.setText(String.valueOf(location.getSpeed()));
-        }
-        else {
-            tv_speed.setText("Not available");
-        }
-
 
     }
 }
